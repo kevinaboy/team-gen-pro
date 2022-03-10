@@ -8,6 +8,13 @@ The team roster includes the engineer’s name, ID, email, and GitHub username.
 
 Note: This functionality is not currently present in the application.
 
+## Get Started
+- Clone this repo `git clone` 
+- Open the application
+- Run `node index.js`
+
+## Video demos
+
 [View intern entry demo >](https://drive.google.com/file/d/1eSY_gw_2LnO3CDk1M3Y9-Ri5-plE1KeL/view)
 <br />
 [View engineer entry demo >](https://drive.google.com/file/d/1ccBGZ-h6njx5me_BM2Q1xgGrSzx_OTKq/view)
