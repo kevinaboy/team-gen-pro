@@ -8,6 +8,7 @@ const Intern = require('./lib/Intern');
 
 const myTeam = require('./src/myTeam');
 const { profile } = require('console');
+const { assertNewExpression } = require('babel-types');
 
 // Create an array of questions for user input
 const questionsArray = [];
@@ -160,10 +161,33 @@ const addEmployee = () => {
         }
       }
     },
+    // Prompt to 
     {
-      type: 'list',
-      name: 'role',
-      message: 'Would you like to add another team member to your profile?',
-      choices: ['Engineer', 'Intern', 'Finish'],
-    },
-  ])
+      type: 'confirm',
+      name: 'addAnotherEmployee',
+      message: "Would you like to add another employee to your profile?",
+    }]);
+  if (answer.addAnotherEmployee === true) {
+    then(employeeData => {
+      let { name, id, email, role, github, school, confirmEmployee } = employeeData;
+      let employee;
+
+      if (role === "Engineer") {
+        employee = new Engineer(name, id, email, github);
+        console.log(employee);
+
+      } else if (role === "Intern") {
+        employee = new Intern(name, id, email, school);
+        console.log(employee);
+      }
+
+      questionsArray.push(employee);
+
+
+      if (confirmEmployee) {
+        return addEmployee(questionsArray);
+      } else {
+        return questionsArray;
+      }
+    })
+  };
