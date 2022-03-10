@@ -1,0 +1,25 @@
+{
+  "name": "team-gen-pro",
+  "version": "1",
+  "description": "This Node.js command-line application takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinaboy/team-gen-pro"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinaboy/team-gen-pro/issues"
+  },
+  "homepage": "https://github.com/kevinaboy/team-gen-pro/#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}
