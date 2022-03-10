@@ -45,6 +45,7 @@ const addManager = () => {
       type: 'input',
       name: 'email',
       message: 'What is your work email address?',
+      match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/], // trying to incorporate a a regex — not currently working
       validate: emailInput => {
         if (emailInput) {
           return true;
@@ -81,8 +82,7 @@ const addManager = () => {
 // Menu prompt to add an engineer or an intern, or to finish building team profile
 const addEmployee = () => {
   console.log(`
-     Next, to add an employee answer the prompts.
-     ============================================
+     > Next, to add an employee answer the prompts.
      `
   );
   return inquirer.prompt([
@@ -159,7 +159,7 @@ const addEmployee = () => {
         }
       }
     },
-    // Promp to 
+    // Promp to add another employee
     {
       type: 'confirm',
       name: 'addAnotherEmployee',
@@ -168,47 +168,159 @@ const addEmployee = () => {
       // if (answer.addAnotherEmployee === true) {
     }
   ])
-    .then(employeeData => {
-      let { name, id, email, role, github, school, confirmEmployee } = employeeData;
-      let employee;
+  //     .then(employeeData => {
+  //       let { name, id, email, role, github, school, confirmEmployee } = employeeData;
+  //       let employee;
 
-      if (role === "Engineer") {
-        employee = new Engineer(name, id, email, github);
-        console.log(employee);
+  //       if (role === "Engineer") {
+  //         employee = new Engineer(name, id, email, github);
+  //         console.log(employee);
 
-      } else if (role === "Intern") {
-        employee = new Intern(name, id, email, school);
-        console.log(employee);
-      }
+  //       } else if (role === "Intern") {
+  //         employee = new Intern(name, id, email, school);
+  //         console.log(employee);
+  //       }
 
-      questionsArray.push(employee);
+  //       questionsArray.push(employee);
 
 
-      if (confirmEmployee) {
-        return addEmployee(questionsArray);
-      } else {
-        return questionsArray;
-      }
-    })
-};
+  //       if (confirmEmployee) {
+  //         return addEmployee(questionsArray);
+  //       } else {
+  //         return questionsArray;
+  //       }
+  //     })
+  // };
 
-const writeFile = (data) => {
-  fs.writeFile('./dist/index.html', data, err => {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
-      console.log("Your Team's profile page is ready! Open index.html");
-    }
-  })
-};
-
+  // const writeFile = (data) => {
+  //   fs.writeFile('./dist/index.html', data, err => {
+  //     if (err) {
+  //       console.log(err);
+  //       return;
+  //     } else {
+  //       console.log("Your Team's profile page is ready! Open index.html to view the page.");
+  //     }
+  //   })
+  // };
+}
 addManager()
   .then(addEmployee)
   .then(questionsArray => {
-    return myTeam(questionsArray);
+    return (questionsArray);
   })
-  .then(profilePage => {
-    return writeFile(profilePage);
+  .then(teamPage => {
+    return writeFile(teamPage);
   })
   .catch(err => { console.log(err); });
+
+
+// Another CLI setup adopted from readme-generator project https://github.com/kevinaboy/readme-generator/  
+// // Function to initialize app
+// function init() {
+//   inquirer.prompt(questions)
+//     .then((answers) => { // chains functions that resturns Promises
+//       console.log(answers)
+//       const str = generateMarkdown(answers)
+//       console.log(str)
+//       fs.writeFileSync("./Output/Readme.md", str)
+//     })
+// }
+
+// // Function call to initialize app
+// init();
+
+
+// Another option from readme-generator project
+
+// const generateMarkdown = require('./utils/generateMarkdown')
+
+
+// // Create an array of questions for user input
+// const questions = [{
+//   type: 'input',
+//   name: 'name',
+//   message: 'Welcome, Team Manager! Please enter your name:',
+// },
+// {
+//   type: 'input',
+//   name: 'id',
+//   message: 'What is your employee ID?',
+// },
+// {
+//   type: 'input',
+//   name: 'email',
+//   message: 'What is your work email address?',
+// },
+// {
+//   type: 'input',
+//   name: 'officeNumber',
+//   message: 'What is your office number?',
+// },
+// {
+//   type: 'list',
+//   name: 'role',
+//   message: "Select your employee's role",
+//   choices: ['Engineer', 'Intern']
+// },
+// {
+//   type: 'input',
+//   name: 'name',
+//   message: "What is your employee's name.",
+// },
+// {
+//   type: 'input',
+//   name: 'id',
+//   message: "What is your employee's id?",
+// },
+// {
+//   type: 'input',
+//   name: 'email',
+//   message: "What is your employee's email?",
+// },
+// {
+//   // Prompt to enter GitHub username only for Engineer
+//   type: 'input',
+//   name: 'github',
+//   message: "What is your Engineer's GitHub username?",
+//   when: (input) => input.role === "Engineer",
+//   validate: githubInput => {
+//     if (githubInput) {
+//       return true;
+//     } else {
+//       console.log("Please enter the Engineer's GitHub username.")
+//     }
+//   }
+// },
+// {
+//   // Prompt to enter school name only for Intern
+//   type: 'input',
+//   name: 'school',
+//   message: "Please enter your Intern's school name.",
+//   when: (input) => input.role === "Intern",
+//   validate: schoolInput => {
+//     if (schoolInput) {
+//       return true;
+//     } else {
+//       console.log("Please enter your Intern's school name.")
+//     }
+//   }
+// },
+// {
+//   type: 'list',
+//   name: 'role',
+//   message: "Would you like to add another comployee, or finish?",
+//   choices: ['Engineer', 'Intern', 'Finish']
+
+// // Function to initialize app
+// function init() {
+//   inquirer.prompt(questions)
+//     .then((answers) => { // chains functions that resturns Promises
+//       console.log(answers)
+//       const str = generateMarkdown(answers)
+//       console.log(str)
+//       fs.writeFileSync("./Output/Readme.md", str)
+//     })
+// }
+
+// // Function call to initialize app
+// init();
