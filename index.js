@@ -214,7 +214,7 @@ addManager()
   .catch(err => { console.log(err); });
 
 
-// Another CLI setup adopted from readme-generator project https://github.com/kevinaboy/readme-generator/  
+// CLI setup alternative adopted from readme-generator project https://github.com/kevinaboy/readme-generator/  
 // // Function to initialize app
 // function init() {
 //   inquirer.prompt(questions)
