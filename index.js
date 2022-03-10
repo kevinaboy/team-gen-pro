@@ -40,3 +40,41 @@ const addManager = () => {
         }
       }
     },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Please enter your work email address.',
+      validate: emailInput => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log("Your entry is invalid. Please enter your work email address.");
+          return false;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'officeNumber',
+      message: 'Please enter your office number.',
+      validate: officeNumberInput => {
+        if (isNaN(officeNumberInput)) {
+          console.log("Your entry is invalid. Please enter your office number.");
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+  ])
+    .then(managerInput => {
+      const { name, id, email, officeNumber } = managerInput;
+      const manager = new Manager(name, id, email, officeNumber);
+
+      workArray.push(manager);
+      console.log(manager);
+    })
+};
+
+// Manager portion complete
+// Menu prompt to add an engineer or an intern, or to finish building my team WHEN I select the engineer option
