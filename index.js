@@ -17,12 +17,12 @@ const addManager = () => {
     {
       type: 'input',
       name: 'name',
-      message: 'Welcome, Team Manager! Please enter your name.',
+      message: 'Welcome, Team Manager! Please enter your name:',
       validate: nameInput => {
         if (nameInput) {
           return true;
         } else {
-          console.log("Please enter your name.");
+          console.log('Please enter your name:');
           return false;
         }
       }
@@ -30,10 +30,10 @@ const addManager = () => {
     {
       type: 'input',
       name: 'id',
-      message: 'Please enter your employee ID.',
+      message: 'What is your employee ID?',
       validate: idInput => {
         if (isNaN(idInput)) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
-          console.log("Try again. Please enter your employee ID.");
+          console.log('Try again. Please enter your employee ID:');
           return false;
         } else {
           return true;
@@ -43,12 +43,12 @@ const addManager = () => {
     {
       type: 'input',
       name: 'email',
-      message: 'Please enter your work email address.',
+      message: 'What is your work email address?',
       validate: emailInput => {
         if (emailInput) {
           return true;
         } else {
-          console.log("Your entry is invalid. Please enter your work email address.");
+          console.log('Your entry is invalid. Please enter your work email address:');
           return false;
         }
       }
@@ -56,10 +56,10 @@ const addManager = () => {
     {
       type: 'input',
       name: 'officeNumber',
-      message: 'Please enter your office number.',
+      message: 'What is your office number?',
       validate: officeNumberInput => {
         if (isNaN(officeNumberInput)) {
-          console.log("Your entry is invalid. Please enter your office number.");
+          console.log('Your entry is invalid. Please enter your office number:');
           return false;
         } else {
           return true;
@@ -78,3 +78,56 @@ const addManager = () => {
 
 // Manager portion complete
 // Menu prompt to add an engineer or an intern, or to finish building my team WHEN I select the engineer option
+
+const addEmployee = () => {
+  console.log(`
+     Next, to add an employee answer the prompts.
+     ============================================
+     `
+  );
+  return inquirer.prompt([
+    {
+      type: 'list',
+      name: 'role',
+      message: "Select your employee's role",
+      choices: ['Engineer', 'Intern']
+    },
+    {
+      type: 'input',
+      name: 'name',
+      message: "What is your employee's name.",
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Your entry is invalid. Please enter your employee's name.");
+          return false;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: "What is your employee's id?",
+      validate: idInput => {
+        if (isNaN(idInput)) {
+          console.log("Please enter the employee's ID.");
+          return false;
+        } else {
+          return true;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: "What is your employee's email?",
+      validate: emailInput => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log("Please enter your employee's email.");
+          return false;
+        }
+      }
+    },
