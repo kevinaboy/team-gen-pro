@@ -6,8 +6,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const generateTeam = require('./src/myTeam');
-
+const myTeam = require('./src/myTeam');
 const { profile } = require('console');
 
 // Create an array of questions for user input
@@ -77,10 +76,9 @@ const addManager = () => {
       console.log(manager);
     })
 };
-
 // Manager portion complete
-// Menu prompt to add an engineer or an intern, or to finish building my team
 
+// Menu prompt to add an engineer or an intern, or to finish building team profile
 const addEmployee = () => {
   console.log(`
      Next, to add an employee answer the prompts.
@@ -160,17 +158,57 @@ const addEmployee = () => {
           console.log("Please enter your Intern's school name.")
         }
       }
+    },
+    // Promp to 
+    {
+      type: 'confirm',
+      name: 'addAnotherEmployee',
+      message: "Would you like to add another employee to your profile?",
+      default: false
+      // if (answer.addAnotherEmployee === true) {
     }
   ])
-};
-function init() {
-  inquirer.prompt(questionsArray)
-    .then((answers) => {
-      console.log(answers)
-      const str = generateTeam(answers)
-      console.log(str)
-      fs.writeFileSync("./dist/index.html", str)
-    })
-}
+    .then(employeeData => {
+      let { name, id, email, role, github, school, confirmEmployee } = employeeData;
+      let employee;
 
-init();
+      if (role === "Engineer") {
+        employee = new Engineer(name, id, email, github);
+        console.log(employee);
+
+      } else if (role === "Intern") {
+        employee = new Intern(name, id, email, school);
+        console.log(employee);
+      }
+
+      questionsArray.push(employee);
+
+
+      if (confirmEmployee) {
+        return addEmployee(questionsArray);
+      } else {
+        return questionsArray;
+      }
+    })
+};
+
+const writeFile = (data) => {
+  fs.writeFile('./dist/index.html', data, err => {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      console.log("Your Team's profile page is ready! Open index.html");
+    }
+  })
+};
+
+addManager()
+  .then(addEmployee)
+  .then(questionsArray => {
+    return myTeam(questionsArray);
+  })
+  .then(profilePage => {
+    return writeFile(profilePage);
+  })
+  .catch(err => { console.log(err); });
