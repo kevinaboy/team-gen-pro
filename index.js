@@ -9,7 +9,7 @@ const Intern = require('./lib/Intern');
 const myTeam = require('./src/myTeam');
 
 // Create an array of questions for user input
-const workArray = [];
+const questionsArray = [];
 
 // Prompt to enter the team manager’s name, employee ID, email address, and office number
 const addManager = () => {
@@ -71,7 +71,7 @@ const addManager = () => {
       const { name, id, email, officeNumber } = managerInput;
       const manager = new Manager(name, id, email, officeNumber);
 
-      workArray.push(manager);
+      questionsArray.push(manager);
       console.log(manager);
     })
 };
