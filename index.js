@@ -131,3 +131,31 @@ const addEmployee = () => {
         }
       }
     },
+    {
+      // Only for engineer
+      type: 'input',
+      name: 'github',
+      message: "What is your Engineer's GitHub username?",
+      when: (input) => input.role === "Engineer",
+      validate: githubInput => {
+        if (githubInput) {
+          return true;
+        } else {
+          console.log("Please enter the Engineer's GitHub username.")
+        }
+      }
+    },
+    {
+      // Only for interns
+      type: 'input',
+      name: 'school',
+      message: "Please enter your Intern's school name.",
+      when: (input) => input.role === "Intern",
+      validate: schoolInput => {
+        if (schoolInput) {
+          return true;
+        } else {
+          console.log("Please enter your Intern's school name.")
+        }
+      }
+    },
