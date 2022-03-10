@@ -7,6 +7,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
 const myTeam = require('./src/myTeam');
+const { profile } = require('console');
 
 // Create an array of questions for user input
 const questionsArray = [];
@@ -77,7 +78,7 @@ const addManager = () => {
 };
 
 // Manager portion complete
-// Menu prompt to add an engineer or an intern, or to finish building my team WHEN I select the engineer option
+// Menu prompt to add an engineer or an intern, or to finish building my team
 
 const addEmployee = () => {
   console.log(`
@@ -132,7 +133,7 @@ const addEmployee = () => {
       }
     },
     {
-      // Only for engineer
+      // Prompt to enter GitHub username only for Engineer
       type: 'input',
       name: 'github',
       message: "What is your Engineer's GitHub username?",
@@ -146,7 +147,7 @@ const addEmployee = () => {
       }
     },
     {
-      // Only for interns
+      // Prompt to enter school name only for Intern
       type: 'input',
       name: 'school',
       message: "Please enter your Intern's school name.",
@@ -159,3 +160,10 @@ const addEmployee = () => {
         }
       }
     },
+    {
+      type: 'list',
+      name: 'role',
+      message: 'Would you like to add another team member to your profile?',
+      choices: ['Engineer', 'Intern', 'Finish'],
+    },
+  ])
